@@ -1,0 +1,33 @@
+<div class="search_form">
+    <%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+    <%= f.text_field :room_name ,placeholder: "キーワードを入力"%>
+    <%= f.text_field :room_address ,placeholder: "エリア名を入力"%>
+    <%= f.submit "検索", class: "btn btn-primary" %>
+    <% end %>
+</div>
+
+<h3>Potepan Shareで<br>
+    まだ体験したことのない<br>
+    旅をしよう
+</h3>
+
+<h3>おすすめエリア</h3>
+<%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+    <%= f.hidden_field :room_address ,value: "東京"%>
+    <%= f.submit "東京", class: "btn btn-primary" %>
+<% end %>
+
+<%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+    <%= f.hidden_field :room_address ,value: "大阪"%>
+    <%= f.submit "大阪", class: "btn btn-primary" %>
+<% end %>
+
+<%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+    <%= f.hidden_field :room_address ,value: "京都"%>
+    <%= f.submit "京都", class: "btn btn-primary" %>
+<% end %>
+
+<%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+    <%= f.hidden_field :room_address ,value: "札幌"%>
+    <%= f.submit "札幌", class: "btn btn-primary" %>
+<% end %>

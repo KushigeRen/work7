@@ -1,0 +1,52 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+.footer {
+position: absolute;
+bottom: 0;
+width: 100%;
+/* Set the fixed height of the footer here */
+height: 120px;
+background-color: #f5f5f5;
+margin-bottom: -120px;
+}
+
+.push {
+    height: 200px;
+}
+
+body > .container {
+padding: 60px 15px 0;
+}
+.container .text-muted {
+margin: 20px 0;
+}
+
+.footer > .container {
+padding-right: 15px;
+padding-left: 15px;
+}
+
+.registration{
+    text-decoration: none;
+    color:white;
+}
+
+.logo{
+    text-decoration: none;
+    color:black;
+}
+
+.login{
+    text-decoration: none;
+    color:black;
+}
+
+.icon{
+    border-radius: 100%;
+}
+
+// room.html
+.room_name{
+    text-decoration: none;
+    color:black;
+}

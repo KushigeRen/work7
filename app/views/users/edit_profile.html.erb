@@ -1,0 +1,21 @@
+<h1>プロフィール</h1>
+<%= form_with model: current_user do |f| %>
+<div>
+    
+    <p><%= f.label :image ,"アイコン"%><br />
+    <%= f.file_field :image %></p>
+
+    <p><%= f.label :name ,"タイトル" %></p>
+    <p><%= f.text_field :name %></p>
+
+    <p><%= f.label :introduction ,"自己紹介" %></p>
+    <p><%= f.text_area :introduction %></p>
+</div>
+
+<div>
+    <ul class="button">
+        <li class="list-unstyled"><%= f.submit "保存", class: 'btn btn-default btn-primary' %></li>
+        <li class="list-unstyled"><%= link_to "キャンセル", :back %></li>
+    </ul>
+</div>
+<% end %>

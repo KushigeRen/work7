@@ -1,0 +1,32 @@
+<h1>新規登録</h1>
+<%= render "shared/error", obj: @room%>
+<%= form_with model: @room do |f|%>
+  <div>
+    <%= f.label :image ,"画像"%><br />
+    <%= f.file_field :image %>
+  </div>
+  <div>
+    <%= f.label :name , "施設名" %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :detail , "施設詳細" %>
+    <%= f.text_area :detail %>
+  </div>
+  <div>
+    <%= f.label :fee , "料金" %>
+    <%= f.text_field :fee %>
+  </div>
+  <div >
+    <%= f.label :address , "住所" %>
+    <%= f.text_field :address %>
+  </div>
+  <div hidden>
+    <%= f.label :user_id , "ユーザーID" %>
+    <%= f.number_field :user_id, value: current_user.id %>
+  </div>
+  <div>
+    <%= f.submit "保存", class: 'btn btn-default btn-primary' %>
+    <%= link_to "キャンセル", root_path, class: 'btn btn-default' %>
+  </div>
+<% end %>

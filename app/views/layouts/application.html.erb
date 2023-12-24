@@ -8,9 +8,59 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <p class="navbar-brand"><%= link_to "Potepan Share", root_path,class: 'logo' %></p>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <% if user_signed_in? %>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <%= image_tag current_user.image.variant(resize: "50x50"), class: 'icon' if current_user.image.attached? %>
+                    <%= current_user.name %>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><%= link_to "施設の新規登録", new_room_path, class: 'dropdown-item' %></li>
+                    <li><%= link_to "予約済み一覧", reservations_own_path, class: 'dropdown-item' %></li>
+                    <li><%= link_to "登録済み一覧", rooms_own_path, class: 'dropdown-item' %></li>
+                    <li><%= link_to "アカウント設定", user_path(current_user.id), class: 'dropdown-item' %></li>
+                    <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          <% else %>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <p class="nav-link active" aria-current="page"><%= link_to "ログイン", user_session_path,class: 'login' %></p>
+                </li>
+                <li class="nav-item">
+                  <button type="button" class="btn btn-primary"><%= link_to "新規登録", new_user_registration_path ,class: 'registration'%></button>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </nav>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+      <div class="push"></div>
+      <footer class="footer">
+        <div class="container">
+          <p class="text-muted">Potepan Share<br>
+          Copyright © Potepan Share 2023 All rights reserved</p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

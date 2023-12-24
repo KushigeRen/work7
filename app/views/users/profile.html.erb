@@ -1,0 +1,7 @@
+<h1>プロフィール</h1>
+<p>アイコン：<%= image_tag current_user.image.variant(resize: "50x50"), class: 'icon' if current_user.image.attached? %></p>
+<p>ユーザー名：<%= current_user.name%></p>
+<p>自己紹介：<%= current_user.introduction%></p>
+
+<p><%= link_to "プロフィールを編集する", 'edit_profile' %></p>
+<p><%= link_to "アカウント", user_path(current_user.id) %></p>

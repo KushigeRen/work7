@@ -1,0 +1,32 @@
+<h3>予約一覧</h3>
+<table class="table table-hover table-inverse">
+<thead>
+<tr>
+    <th>イメージ</th>
+    <th>名前</th>
+    <th>詳細</th>
+    <th>合計料金</th>
+    <th>チェックイン</th>
+    <th>チェックアウト</th>
+    <th>予約確定日時</th>
+</tr>
+</thead>
+<tbody>
+<% @reservations.each do |reservation| %>
+    <% @room = Room.find_by(id: reservation.room_id) %>
+    <% number_of_days = reservation.check_out_date - reservation.check_in_date %>
+    <% number_of_days = number_of_days.to_i %>
+    <% total_fee = @room.fee * number_of_days * reservation.number_of_guests %>
+    <tr>
+    <td><%= image_tag @room.image if @room.image.attached? %></td>
+    <td><%= @room.name %></td>
+    <td><%= @room.detail %></td>
+    <td><%= total_fee %></td>
+    <td><%= reservation.check_in_date %></td>
+    <td><%= reservation.check_out_date %></td>
+    <td><%= l reservation.reservation_datetime %></td>
+    <td><%= link_to "編集", edit_reservation_path(reservation.id, room_id: reservation.room_id) %></td>
+    </tr>
+<% end %>
+</tbody>
+</table>

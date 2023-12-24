@@ -1,0 +1,27 @@
+<h1>予約内容の確認</h1>
+
+
+
+<%= form_with model: @reservation do |f| %>
+
+    <% @room = Room.find_by(id: @reservation.room_id) %>
+
+    <% number_of_days = @reservation.check_out_date - @reservation.check_in_date %>
+    <% number_of_days = number_of_days.to_i %>
+    <% total_fee = @room.fee * number_of_days * @reservation.number_of_guests %>
+    <p>チェックイン：<%= @reservation.check_in_date %></p>
+    <p>チェックアウト：<%= @reservation.check_out_date %></p>
+    <p>日数：<%= number_of_days %></p>
+    <p>人数：<%= @reservation.number_of_guests %></p>
+    <p>お支払い金額：<%= total_fee %></p>
+
+    <%= f.hidden_field :check_in_date , class: "form-control"%>
+    <%= f.hidden_field :check_out_date , class: "form-control"%>
+    <%= f.hidden_field :number_of_guests , class: "form-control"%>
+    <%= f.hidden_field :reservation_datetime , class: "form-control"%>
+    <%= f.hidden_field :user_id , class: "form-control"%>
+    <%= f.hidden_field :room_id , class: "form-control"%>
+
+    <p>上記内容でよろしければ「確定」ボタンを押してください。</p>
+    <%= f.submit "予約を確定", class: 'btn btn-default btn-primary' %>
+<% end %>

@@ -1,0 +1,31 @@
+<%= link_to "戻る", :back %>
+
+<%= link_to "編集", edit_room_path if current_user.id == @room.user_id %>
+<%= image_tag @room.image if @room.image.attached? %>
+<h3><%= @room.name %></h3>
+<p><%= @room.address %></p>
+<p><%= @room.fee %></p>
+<p><%= @room.detail %></p>
+
+<%= form_with url: reservations_comfirm_path do |f| %>
+    <table>
+        <div class="row">
+            <tr>
+                <th class="col-md-4"><%= f.label :check_in_date ,"チェックイン" %></th>
+                <th class="col-md-4"><%= f.label :check_out_date ,"チェックアウト" %></th>
+                <th class="col-md-4"><%= f.label :number_of_guests ,"人数" %></th>
+            </tr>
+        </div>
+        <div class="row">
+            <tr>
+                <td class="col-md-4"><%= f.date_field 'reservation[check_in_date]' , class: "form-control", required: true %></td>
+                <td class="col-md-4"><%= f.date_field 'reservation[check_out_date]', class: "form-control", required: true %></td>
+                <td class="col-md-4"><%= f.text_field 'reservation[number_of_guests]' , class: "form-control", required: true %></td>
+                <%= f.hidden_field 'reservation[reservation_datetime]' , class: "form-control", :value => Time.now %>
+                <%= f.hidden_field 'reservation[user_id]' , class: "form-control", :value => current_user.id %>
+                <%= f.hidden_field 'reservation[room_id]' , class: "form-control", :value => @room.id %>
+            </tr>
+        </div>
+    </table>
+    <%= f.submit "予約", class: 'btn btn-default btn-primary' %>
+<% end %>
