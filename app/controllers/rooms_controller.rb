@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-    before_action :authenticate_user!, except: [:show,:search]
+    before_action :authenticate_user!, except: [:search]
     def index
 
     end
@@ -15,7 +15,7 @@ class RoomsController < ApplicationController
     def create
         @room = Room.new(room_param)
         if @room.save
-            # flash[:notice] = "新しい予定を登録しました"
+            flash[:notice] = "新しい施設を登録しました"
             redirect_to room_path(@room.id)
         else
             render 'new'
@@ -29,7 +29,7 @@ class RoomsController < ApplicationController
     def update
         @room = Room.find(params[:id])
         if @room.update(room_param)
-        # flash[:notice] = "予定を編集しました"
+        flash[:notice] = "施設情報を編集しました"
         redirect_to room_path
         else
         render "edit"
@@ -37,7 +37,11 @@ class RoomsController < ApplicationController
     end
 
     def destroy
-
+        @room = Room.find(params[:id])
+        if @room.destroy
+            flash[:notice] = "施設を削除しました"
+            redirect_to rooms_own_path
+        end
     end
 
     def search
@@ -55,7 +59,6 @@ class RoomsController < ApplicationController
     def own
         @rooms = Room.registered_room(current_user.id)
     end
-
 
 private
     def room_param

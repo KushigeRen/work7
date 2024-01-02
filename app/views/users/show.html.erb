@@ -1,5 +1,36 @@
-<h1>アカウント情報</h1>
-<p>メールアドレス：<%= current_user.email%></p>
-<p>パスワード：**********</p>
-<%= link_to "編集", edit_user_registration_path %>
-<%= link_to "プロフィール", 'profile' %>
+<div class="row">
+        <div class="col-3 ms-4">
+            <ul class="nav flex-column mt-4">
+                <li class="nav-item">
+                    <span><%= link_to "アカウント", user_path(current_user.id) ,class: "nav-link" %></span>
+                </li>
+                <li class="nav-item">
+                    <span><%= link_to "プロフィール", 'profile' ,class: "nav-link" %></span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col" style="font-size:24px">アカウント</th>
+                    <th scope="col"></th>
+                    <th scope="col"><%= link_to "編集", edit_user_registration_path, style: "text-decoration:none" %></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">メールアドレス：</th>
+                    <td><%= current_user.email%></td>
+                    <td></td>
+                    </tr>
+                    <tr>
+                    <th scope="row">パスワード：</th>
+                    <td>**********</td>
+                    <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+

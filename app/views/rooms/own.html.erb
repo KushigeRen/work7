@@ -1,23 +1,30 @@
-<h3>登録施設一覧</h3>
-<table class="table table-hover table-inverse">
-<thead>
-<tr>
-    <th>名前</th>
-    <th>詳細</th>
-    <th>料金</th>
-    <th>住所</th>
-</tr>
-</thead>
-<tbody>
-<% @rooms.each do |room| %>
+<div class="content">
+    <% if flash[:notice] %>
+        <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <h3 class="mt-4 mb-4">登録施設一覧</h3>
+    <table class="table table-hover table-inverse">
+    <thead>
     <tr>
-    <td><%= image_tag room.image if room.image.attached? %></td>
-    <td><%= room.name %></td>
-    <td><%= room.detail %></td>
-    <td><%= room.fee %></td>
-    <td><%= room.address %></td>
-    <td><%= link_to "詳細", room_path(room) %></td>
+        <th>イメージ</th>
+        <th>名前</th>
+        <th>詳細</th>
+        <th>料金</th>
+        <th>住所</th>
     </tr>
-<% end %>
-</tbody>
-</table>
+    </thead>
+    <tbody>
+    <% @rooms.each do |room| %>
+        <tr class="align-middle">
+        <td><%= image_tag room.image.variant(resize:'120x70') if room.image.attached? %></td>
+        <td><%= room.name %></td>
+        <td class="test"><%= room.detail %></td>
+        <td>¥<%= room.delimiter(room.fee) %></td>
+        <td><%= room.address %></td>
+        <td><%= link_to "詳細", room_path(room), style: "text-decoration:none" %></td>
+        <td><%= link_to "削除", room_path(room), method: :delete, data:{confirm: "本当に削除しますか？"}, style: "text-decoration:none" %></td>
+        </tr>
+    <% end %>
+    </tbody>
+    </table>
+</div>

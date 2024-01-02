@@ -1,4 +1,25 @@
 ja:
- time: 
+ activerecord:
+  models:
+   reservation: 予約
+   room: 部屋
+   user: ユーザー
+  attributes:
+   reservation:
+    check_in_date: チェックイン日
+    check_out_date: チェックアウト日
+    number_of_guests: 人数
+    reservation_datetime: 予約日時
+   room:
+    name: 施設名
+    detail: 施設詳細
+    fee: 料金
+    address: 住所
+    check_out_date: チェックアウト日
+   user:
+    name: ユーザー名
+    email: メールアドレス
+    introduction: 自己紹介
+ time:
   formats:
    default: "%Y/%m/%d %H:%M"

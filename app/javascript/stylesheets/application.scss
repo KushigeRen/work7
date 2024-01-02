@@ -1,29 +1,50 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
+//application.html
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px
+}
+
+.wrapper{
+    min-height: 100vh;
+    position: relative;
+}
+
+.push{
+    height: 100x;
+}
+
 .footer {
-position: absolute;
-bottom: 0;
-width: 100%;
-/* Set the fixed height of the footer here */
-height: 120px;
-background-color: #f5f5f5;
-margin-bottom: -120px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    margin-bottom: -100px;
 }
-
-.push {
-    height: 200px;
-}
-
-body > .container {
-padding: 60px 15px 0;
+.container {
+    width: auto;
+    max-width: 680px;
+    padding: 0 15px;
 }
 .container .text-muted {
-margin: 20px 0;
+    margin: 20px 0;
 }
 
-.footer > .container {
-padding-right: 15px;
-padding-left: 15px;
+.navbar{
+    padding: 20px 0;
+}
+
+.navbar-brand{
+    margin: 0;
+}
+
+.nav-link{
+    margin: 0;
 }
 
 .registration{
@@ -45,8 +66,114 @@ padding-left: 15px;
     border-radius: 100%;
 }
 
-// room.html
-.room_name{
+//home.html
+.firstview{
+    background-image: url(../../assets/images/home.jpg);
+    background-size: cover;
+    height: 800px;
+}
+
+form .row{
+    padding: 0;
+    margin: 0;
+}
+
+.input-group li{
+    list-style: none;
+    padding: 0;
+}
+
+.message{
+    color:white;
+    font-size: 48px;
+    text-align: center;
+}
+
+.recommend{
+    border-bottom: 3px dotted #b2d5de;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.card-img-top{
+    height: 250px;
+}
+
+.content{
+    margin:0 20px
+}
+
+.recomend-search{
+    width: 100%;
+}
+
+.card{
+    height: 550px;
+}
+
+.recomend-search{
+    display: block;
+    margin:0 auto;
+}
+
+// search.htnl
+.room-detail{
+    width: 400px;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    /* ブラウザがサポートしていない場合のフェールセーフ */
+    max-height: 80px;
+}
+
+.room-name{
     text-decoration: none;
     color:black;
+}
+
+// show.html
+.room-show{
+    margin: 0 60px;
+}
+
+.edit-room{
+    text-decoration: none;
+    display: block;
+    text-align: right;
+}
+
+.room-fee{
+    font-size: 36px;
+    color:$blue-300;
+}
+
+
+
+// reservation/own.html
+.own-detail{
+    width: 300px;
+    // white-space: nowrap;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+}
+
+// _error.html
+.error-message{
+    list-style: none;
+    color:red;
+    font-size:small;
+}
+
+
+// session/new.html
+.notice{
+    color:blue;
+    font-size:small;
+}
+
+.alert{
+    color:red;
+    font-size: small;
 }

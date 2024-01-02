@@ -1,32 +1,44 @@
-<h3>予約一覧</h3>
-<table class="table table-hover table-inverse">
-<thead>
-<tr>
-    <th>イメージ</th>
-    <th>名前</th>
-    <th>詳細</th>
-    <th>合計料金</th>
-    <th>チェックイン</th>
-    <th>チェックアウト</th>
-    <th>予約確定日時</th>
-</tr>
-</thead>
-<tbody>
-<% @reservations.each do |reservation| %>
-    <% @room = Room.find_by(id: reservation.room_id) %>
-    <% number_of_days = reservation.check_out_date - reservation.check_in_date %>
-    <% number_of_days = number_of_days.to_i %>
-    <% total_fee = @room.fee * number_of_days * reservation.number_of_guests %>
+<div class="content">
+    <h3 class="mt-4 mb-4">予約一覧</h3>
+    <% if flash[:notice] %>
+        <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <table class="table table-hover table-inverse">
+    <thead>
     <tr>
-    <td><%= image_tag @room.image if @room.image.attached? %></td>
-    <td><%= @room.name %></td>
-    <td><%= @room.detail %></td>
-    <td><%= total_fee %></td>
-    <td><%= reservation.check_in_date %></td>
-    <td><%= reservation.check_out_date %></td>
-    <td><%= l reservation.reservation_datetime %></td>
-    <td><%= link_to "編集", edit_reservation_path(reservation.id, room_id: reservation.room_id) %></td>
+        <th>イメージ</th>
+        <th>名前</th>
+        <th>詳細</th>
+        <th>合計料金</th>
+        <th>チェックイン</th>
+        <th>チェックアウト</th>
+        <th>予約確定日時</th>
     </tr>
-<% end %>
-</tbody>
-</table>
+    </thead>
+    <tbody>
+    <% @reservations.each do |reservation| %>
+        <% @room = Room.find_by(id: reservation.room_id) %>
+        <% number_of_days = reservation.check_out_date - reservation.check_in_date %>
+        <% number_of_days = number_of_days.to_i %>
+        <% total_fee = @room.fee * number_of_days * reservation.number_of_guests %>
+        <tr class="align-middle">
+            <td><%= image_tag @room.image.variant(resize:'120x70') if @room.image.attached? %></td>
+            <td><%= link_to @room.name, room_path(@room), style: "text-decoration:none" %></td>
+            <td class="own-detail"><%= @room.detail %></td>
+            <td>¥<%= reservation.delimiter(total_fee) %></td>
+            <td><%= reservation.check_in_date %></td>
+            <td><%= reservation.check_out_date %></td>
+            <td><%= l reservation.reservation_datetime %></td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><%= link_to "編集", edit_reservation_path(reservation.id,room_id: reservation.room_id), style: "text-decoration:none", class: "dropdown-item" %></li>
+                        <li><%= link_to "予約をキャンセル", reservation_path(reservation), method: :delete, data:{confirm: "予約をキャンセルしますか？"}, style: "color:red", class: "dropdown-item" %></li>
+                    </ul>
+                </div>
+            </td>
+    <% end %>
+    </tbody>
+    </table>
+</div>

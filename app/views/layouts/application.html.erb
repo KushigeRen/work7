@@ -21,10 +21,10 @@
           </button>
           <% if user_signed_in? %>
             <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-              <ul class="navbar-nav ms-auto">
+              <ul class="navbar-nav ms-auto me-5">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <%= image_tag current_user.image.variant(resize: "50x50"), class: 'icon' if current_user.image.attached? %>
+                    <%= image_tag current_user.image.variant(resize: "30x30"), class: 'icon' if current_user.image.attached? %>
                     <%= current_user.name %>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
@@ -51,16 +51,14 @@
           <% end %>
         </div>
       </nav>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
       <%= yield %>
+      </div>
       <div class="push"></div>
-      <footer class="footer">
+      <footer class="footer bg-light>
         <div class="container">
           <p class="text-muted">Potepan Share<br>
           Copyright © Potepan Share 2023 All rights reserved</p>
         </div>
       </footer>
-    </div>
   </body>
 </html>

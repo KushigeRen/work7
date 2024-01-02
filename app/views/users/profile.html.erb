@@ -1,7 +1,46 @@
-<h1>プロフィール</h1>
-<p>アイコン：<%= image_tag current_user.image.variant(resize: "50x50"), class: 'icon' if current_user.image.attached? %></p>
-<p>ユーザー名：<%= current_user.name%></p>
-<p>自己紹介：<%= current_user.introduction%></p>
 
-<p><%= link_to "プロフィールを編集する", 'edit_profile' %></p>
-<p><%= link_to "アカウント", user_path(current_user.id) %></p>
+<div class="row">
+    <div class="col-3 ms-4">
+        <ul class="nav flex-column mt-4">
+            <li class="nav-item">
+                <span><%= link_to "アカウント", user_path(current_user.id) ,class: "nav-link" %></span>
+            </li>
+            <li class="nav-item">
+                <span><%= link_to "プロフィール", 'profile' ,class: "nav-link" %></span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-8">
+        <% if flash[:notice] %>
+            <p class="notice"><%= flash[:notice] %></p>
+        <% end %>
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col" style="font-size:24px">プロフィール</th>
+                <th scope="col"></th>
+                <th scope="col"><%= link_to "編集", 'edit_profile' ,style: "text-decoration:none"%></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">アイコン：</th>
+                <td><%= image_tag current_user.image.variant(resize: "70x70"), class: 'icon' if current_user.image.attached? %></td>
+                <td></td>
+                </tr>
+                <tr>
+                <th scope="row">ユーザー名：</th>
+                <td><%= current_user.name%></td>
+                <td></td>
+                </tr>
+                <tr>
+                <th scope="row">自己紹介：</th>
+                <td><%= current_user.introduction%></td>
+                <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

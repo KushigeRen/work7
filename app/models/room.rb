@@ -34,4 +34,9 @@ class Room < ApplicationRecord
       self.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'room_sample.png')), filename: 'room_sample.png', content_type: 'image/png')
     end
   end
+
+  def delimiter(num)
+    return num.to_s(:delimited)
+  end
+
 end
