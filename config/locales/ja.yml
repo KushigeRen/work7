@@ -16,6 +16,7 @@ ja:
     fee: 料金
     address: 住所
     check_out_date: チェックアウト日
+    check_in_date: チェックイン日
    user:
     name: ユーザー名
     email: メールアドレス

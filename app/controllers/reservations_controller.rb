@@ -47,12 +47,25 @@ class ReservationsController < ApplicationController
     def comfirm
         @reservation = Reservation.find_or_initialize_by(id: params[:reservation_id])
         @reservation.assign_attributes(reservation_param)
-        
         # 予約情報入力欄バリデーション
         @room = Room.find(@reservation.room_id)
         if  @reservation.check_in_date >= @reservation.check_out_date
-            @room.errors.add(:check_out_date,'はチェックイン日より後の日付を設定してください。')
-            render "rooms/show"
+            if @reservation.id.nil?
+                @room.errors.add(:check_out_date,'はチェックイン日より後の日付を設定してください。')
+                render "rooms/show"
+            else
+                @reservation.errors.add(:check_out_date,'はチェックイン日より後の日付を設定してください。')
+                render "edit"
+            end
+        end
+        if @reservation.check_in_date < Date.today
+            if @reservation.id.nil?
+                @room.errors.add(:check_in_date, "は今日以降の日付を選択してください")
+                render "rooms/show"
+            else
+                @reservation.errors.add(:check_out_date,'はチェックイン日より後の日付を設定してください。')
+                render "edit"
+            end
         end
     end
 

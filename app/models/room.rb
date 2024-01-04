@@ -29,12 +29,14 @@ class Room < ApplicationRecord
     return Room.where("user_id = ?", "#{user_id}")
   end
 
+  # 新規登録時部屋画像未設定の場合デフォルト画像挿入
   def default_image
     if !self.image.attached?
       self.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'room_sample.png')), filename: 'room_sample.png', content_type: 'image/png')
     end
   end
 
+  # 数値を３桁ごとにカンマ区切りする関数
   def delimiter(num)
     return num.to_s(:delimited)
   end

@@ -1,8 +1,5 @@
 <div class="room-show mt-3">
     <%= render "shared/error", obj: @room%>
-    <% if flash[:notice] %>
-        <p class="notice"><%= flash[:notice] %></p>
-    <% end %>
     <div class="row">
         <div class="col-6">
             <p><%= link_to "⇦戻る", :back ,style: style="text-decoration:none" %></p>

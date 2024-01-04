@@ -1,6 +1,7 @@
 <div class="container mt-4">
+    <%= render "shared/error", obj: @reservation%>
     <h3 class="mt-4 mb-4">予約変更</h3>
-    <% @room = Room.find(params[:room_id]) %>
+    <% @room = Room.find_by(id: @reservation.room_id) %>
     <h3><%= @room.name %></h3>
     <p><%= @room.address %></p>
     <p>¥<%= @room.delimiter(@room.fee) %> /日</p>
