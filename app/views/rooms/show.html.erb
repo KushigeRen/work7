@@ -2,7 +2,7 @@
     <%= render "shared/error", obj: @room%>
     <div class="row">
         <div class="col-6">
-            <p><%= link_to "⇦戻る", :back ,style: style="text-decoration:none" %></p>
+            <p><%= link_to "⇦戻る", :back,style: style="text-decoration:none" %></p>
             <%= image_tag @room.image if @room.image.attached? %>
         </div>
         <div class="col-6">

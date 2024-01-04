@@ -45,4 +45,6 @@
   <% end %>
 </div>
 
-
+<% if @room.errors.any? %>
+  <%= javascript_pack_tag 'rooms/new_render' %>
+<% end %>
