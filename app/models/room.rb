@@ -40,5 +40,4 @@ class Room < ApplicationRecord
   def delimiter(num)
     return num.to_s(:delimited)
   end
-
 end

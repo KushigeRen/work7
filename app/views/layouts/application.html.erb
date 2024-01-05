@@ -54,6 +54,9 @@
       <% if flash[:notice] %>
         <p class="notice"><%= flash[:notice] %></p>
       <% end %>
+      <% if flash[:alert] %>
+        <p class="alert"><%= flash[:aleat] %></p>
+      <% end %>
       <%= yield %>
       </div>
       <div class="push"></div>

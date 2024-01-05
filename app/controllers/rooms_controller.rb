@@ -5,7 +5,7 @@ class RoomsController < ApplicationController
     end
 
     def show
-        @room = Room.find(params[:id])
+        room = Room.find(params[:id])
     end
 
     def new
@@ -29,10 +29,10 @@ class RoomsController < ApplicationController
     def update
         @room = Room.find(params[:id])
         if @room.update(room_param)
-        flash[:notice] = "施設情報を編集しました"
-        redirect_to room_path
+            flash[:notice] = "施設情報を編集しました"
+            redirect_to room_path
         else
-        render "edit"
+            render "edit"
         end
     end
 

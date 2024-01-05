@@ -1,5 +1,7 @@
 <div class="container mt-4">
-    <%= render "shared/error", obj: @reservation%>
+    <% if $room.present? %>
+        <%= render "shared/error", obj: $room%>
+    <% end %>
     <h3 class="mt-4 mb-4">予約変更</h3>
     <% @room = Room.find_by(id: @reservation.room_id) %>
     <h3><%= @room.name %></h3>
