@@ -1,0 +1,42 @@
+<div class="room-show mt-3">
+    <% if $room.present? %>
+        <%= render "shared/error", obj: $room%>
+    <% end %>
+    <div class="row">
+        <div class="col-6">
+            <p><%= link_to "⇦戻る", :back,style: style="text-decoration:none" %></p>
+            <%= image_tag $room.image if $room.image.attached? %>
+        </div>
+        <div class="col-6">
+            <%= link_to "編集", edit_room_path($room.id) ,class: "edit-room me-4" if current_user.id == $room.user_id %>
+            <h2><%= $room.name %></h2>
+            <p><%= $room.address %></p>
+            <p class="room-fee">¥<%= $room.delimiter($room.fee) %></p>
+            <p><%= $room.detail %></p>
+            <%= form_with url: reservations_comfirm_path do |f| %>
+                <table>
+                    <div class="row">
+                        <tr>
+                            <th class="col-md-4"><%= f.label :check_in_date ,"チェックイン" %></th>
+                            <th class="col-md-4"><%= f.label :check_out_date ,"チェックアウト" %></th>
+                            <th class="col-md-4"><%= f.label :number_of_guests ,"人数" %></th>
+                        </tr>
+                    </div>
+                    <div class="row">
+                        <tr>
+                            <td class="col-md-4"><%= f.date_field 'reservation[check_in_date]' , class: "form-control", required: true %></td>
+                            <td class="col-md-4"><%= f.date_field 'reservation[check_out_date]', class: "form-control", required: true %></td>
+                            <td class="col-md-4"><%= f.number_field 'reservation[number_of_guests]' , class: "form-control", placeholder: '0', min: 1, max: 99, required: true %></td>
+                            <%= f.hidden_field 'reservation[reservation_datetime]' , class: "form-control", :value => Time.now %>
+                            <%= f.hidden_field 'reservation[user_id]' , class: "form-control", :value => current_user.id %>
+                            <%= f.hidden_field 'reservation[room_id]' , class: "form-control", :value => $room.id %>
+                        </tr>
+                    </div>
+                </table>
+                <div class="d-grid gap-2">
+                    <%= f.submit "予約", class: 'btn btn-default btn-primary mt-3' %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

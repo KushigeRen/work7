@@ -1,0 +1,50 @@
+<div class="container">
+  <h2 class="mt-4 mb-4">新規登録</h2>
+  <%= render "shared/error", obj: @room%>
+  <%= form_with model: @room do |f|%>
+  <div class="row">
+    <div class="col-4 fw-bold">
+      <p class="mb-3"><%= f.label :name , "施設名" %><span style="color:red;">*</span></p>
+    </div>
+    <div class="col-8">
+      <p><%= f.text_field :name ,placeholder: "ルーム名を入力" ,class: "form-control"%></p>
+    </div>
+    <div class="col-4 fw-bold align-items-center">
+      <p class="mb-3"><%= f.label :detail , "施設詳細" %><span style="color:red;">*</span></p>
+    </div>
+    <div class="col-8">
+      <p><%= f.text_area :detail ,placeholder: "施設詳細を入力" ,class: "form-control" %></p>
+    </div>
+    <div class="col-4 fw-bold">
+      <p class="mb-3"><%= f.label :fee , "料金" %><span style="color:red;">*</span></p>
+    </div>
+    <div class="col-8">
+      <p><%= f.text_field :fee ,placeholder: "１泊あたりの料金を入力" ,class: "form-control" %></p>
+    </div>
+    <div class="col-4 fw-bold">
+      <p class="mb-3"><%= f.label :address , "住所" %><span style="color:red;">*</span></p>
+    </div>
+    <div class="col-8">
+      <p><%= f.text_field :address ,placeholder: "住所を入力" ,class: "form-control" %></p>
+    </div>
+    <div class="col-4 fw-bold">
+      <p class="mb-3"><%= f.label :image ,"施設画像"%></p>
+    </div>
+    <div class="col-8">
+      <p><%= f.file_field :image ,class: "form-control" %></p>
+    </div>
+    <div hidden>
+      <%= f.label :user_id , "ユーザーID" %>
+      <%= f.number_field :user_id, value: current_user.id %>
+    </div>
+  </div>
+  <div class="d-grid gap-2 mt-3">
+    <%= f.submit "保存", class: 'btn btn-default btn-primary mb-2' %>
+    <%= link_to "キャンセル", root_path, class: 'btn btn-secondary' %>
+  </div>
+  <% end %>
+</div>
+
+<% if @room.errors.any? %>
+  <%= javascript_pack_tag 'rooms/new_render' %>
+<% end %>

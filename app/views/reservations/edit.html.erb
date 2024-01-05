@@ -1,0 +1,36 @@
+<div class="container mt-4">
+    <% if $room.present? %>
+        <%= render "shared/error", obj: $room%>
+    <% end %>
+    <h3 class="mt-4 mb-4">予約変更</h3>
+    <% @room = Room.find_by(id: @reservation.room_id) %>
+    <h3><%= @room.name %></h3>
+    <p><%= @room.address %></p>
+    <p>¥<%= @room.delimiter(@room.fee) %> /日</p>
+    <p><%= @room.detail %></p>
+    <%= form_with url: reservations_comfirm_path(reservation_id: @reservation.id) do |f| %>
+        <table>
+            <div class="row">
+                <tr>
+                    <th class="col-md-4"><%= f.label :check_in_date ,"チェックイン" %></th>
+                    <th class="col-md-4"><%= f.label :check_out_date ,"チェックアウト" %></th>
+                    <th class="col-md-4"><%= f.label :number_of_guests ,"人数" %></th>
+                </tr>
+            </div>
+            <div class="row">
+                <tr>
+                    <td class="col-md-4"><%= f.date_field 'reservation[check_in_date]' , class: "form-control", required: true , :value => @reservation.check_in_date %></td>
+                    <td class="col-md-4"><%= f.date_field 'reservation[check_out_date]', class: "form-control", required: true , :value => @reservation.check_out_date  %></td>
+                    <td class="col-md-4"><%= f.text_field 'reservation[number_of_guests]' , class: "form-control", placeholder: '0', required: true , :value => @reservation.number_of_guests %></td>
+                    <%= f.hidden_field 'reservation[reservation_datetime]' , class: "form-control", :value => Time.now %>
+                    <%= f.hidden_field 'reservation[user_id]' , class: "form-control", :value => current_user.id %>
+                    <%= f.hidden_field 'reservation[room_id]' , class: "form-control", :value => @room.id %>
+                </tr>
+            </div>
+        </table>
+        <div class="d-grid gap-2 mt-2">
+            <%= f.submit "保存", class: 'btn btn-primary' %>
+            <%= link_to "キャンセル", reservations_own_path , class: "btn btn-secondary"%>
+        </div>
+    <% end %>
+</div>

@@ -1,0 +1,30 @@
+<div class="search_form container mt-4 mb-4">
+    <%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+        <ul class="input-group mb-1 row">
+            <li class="col"><%= f.text_field :room_name ,placeholder: "キーワードを入力" ,class: "form-control"%></li>
+            <li class="col ms-2"><%= f.text_field :room_address ,placeholder: "エリア名を入力",class: "form-control"%></li>
+            <li class="col ms-2"><%= f.submit "検索", class: "btn btn-primary" %></li>
+        </ul>
+    <% end %>
+</div>
+<div class="content">
+    <p><strong><%= @rooms.length %></strong>件が見つかりました。</p>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% @rooms.each do |room| %>
+        <div class="col">
+            <div class="card">
+            <%= image_tag room.image, class: "card-img-top", alt: "部屋のイメージ画像" %>
+                <div class="card-body bg-light">
+                    <h5 class="card-title"><%= link_to room.name,room_path(room), class: 'room-name' %></h5>
+                    <p class="fs-6"><%= room.address %></p>
+                    <p class="card-text room-detail"><%= room.detail %></p>
+                    <ul class="ps-0">
+                        <li class="fs-2" style="list-style:none">¥<%= room.delimiter(room.fee) %></li>
+                        <li class="btn btn-outline-primary"><%= link_to "詳細", room_path(room) ,style: "text-decoration:none" %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

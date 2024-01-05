@@ -1,0 +1,77 @@
+<div class="firstview">
+    <div class="firstview-content container">
+        <div class="message">
+            <p class="pt-5 mb-3">Potepan Shareで</p>
+            <p class="mb-3">まだ体験したことのない</p>
+            <p class="mb-5">旅をしよう</p>
+        </div>
+        <div class="search_form">
+            <%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+            <ul class="input-group mb-1 row">
+                <li class="col"><%= f.text_field :room_name ,placeholder: "キーワードを入力" ,class: "form-control"%></li>
+                <li class="col"><%= f.text_field :room_address ,placeholder: "エリア名を入力",class: "form-control"%></li>
+            </ul>
+            <div class="d-grid gap-2">
+                <%= f.submit "検索", class: "btn btn-primary" %>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <p class="m-5"><span class="recommend"> おすすめのエリア </span></p>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col">
+        <div class="card">
+        <%= image_tag "Tokyo.jpg" ,class: "card-img-top", alt:"東京"%>
+        <div class="card-body">
+            <%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+            <%= f.hidden_field :room_address ,value: "東京"%>
+            <h5 class="card-title">東京</h5>
+            <p class="card-text mb-4">エキサイティングなアート、ショッピング、グルメが集う都市。歴史と未来が交差する街で、美しい庭園、モダンな高層ビル、カルチャーが魅力。夜は輝くネオンが街を彩り、夢のような体験が広がります。</p>
+            <%= f.submit "部屋を探す", class: "btn btn-primary recommend-search" %>
+            <% end %>
+        </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+        <%= image_tag "Osaka.jpg" ,class: "card-img-top", alt:"大阪"%>
+        <div class="card-body">
+            <%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+            <%= f.hidden_field :room_address ,value: "大阪"%>
+            <h5 class="card-title">大阪</h5>
+            <p class="card-text mb-4">活気溢れるエンターテインメントと美食の宝庫。歴史ある城とモダンなショッピングストリートが共存。地元の人々の温かさが感じられ、夜は輝くネオンで賑やかな夜景。楽しみと驚きが詰まった大都市。</p>
+            <%= f.submit "部屋を探す", class: "btn btn-primary recommend-search" %>
+            <% end %>
+        </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+        <%= image_tag "Kyoto.jpg" ,class: "card-img-top", alt:"京都"%>
+        <div class="card-body">
+            <%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+            <%= f.hidden_field :room_address ,value: "京都"%>
+            <h5 class="card-title">京都</h5>
+            <p class="card-text mb-4">日本の歴史と美が息づく穏やかな都。伝統的な神社仏閣、美しい庭園が広がり、抹茶と和菓子の文化に触れる。静謐な雰囲気と伝統的な街並みが、心を癒す至福のひとときを約束。</p>
+            <%= f.submit "部屋を探す", class: "btn btn-primary recommend-search" %>
+            <% end %>
+        </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+        <%= image_tag "Sapporo.jpg" ,class: "card-img-top", alt:"札幌"%>
+        <div class="card-body">
+            <%= form_with url: rooms_search_path, local: true, method: :get do |f| %>
+            <%= f.hidden_field :room_address ,value: "札幌"%>
+            <h5 class="card-title">札幌</h5>
+            <p class="card-text mb-4">自然豊かな北の都。雄大な大自然や絶品の海産物、冬の雪まつりで知られ、スキーから温泉まで楽しめる。洗練された都会と自然の調和が魅力。</p>
+            <%= f.submit "部屋を探す", class: "btn btn-primary recommend-search" %>
+            <% end %>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
